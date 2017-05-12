@@ -1,18 +1,19 @@
 
 x = randn(50,500);
-
+m = mean(x);
 %covariance matrix with zero-mean
 cov_mat = cov(x);
-%eigenvectors and eigenvalues of the covariance matrix
-[v, d] = eig(cov_mat);
 %get the k largest eigenvalues and corresponding eigenvectors of v
-[v_red, d_red] = eigs(v,100);
+[v, d] = eigs(cov_mat, 50);
+d = diag(d);
 % new data
-z = x * v_red';
-
+z = x * v;
 % recover data
-xhat = z * v_red;
+xhat = z * v';
 % add the mean (?)
-
+xhat = xhat + m;
 % calculate the error
-sqrt(mean(mean((x-xhat).^2)))
+sqrt(mean(mean((x-xhat).^2)));
+
+a = pca(x);
+

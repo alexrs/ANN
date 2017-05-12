@@ -1,14 +1,14 @@
-function [alphabet,targets] = prprob()
-%PRPROB Character recognition problem definition
-%  
-%  [ALHABET,TARGETS] = PRPROB()
-%  Returns:
-%    ALPHABET - 35x26 matrix of 5x7 bit maps for each letter.
-%    TARGETS  - 26x26 target vectors.
-
-% Mark Beale, 1-31-92
-% Revised 12-15-93, MB.
-% Copyright 1992-2002 The MathWorks, Inc.
+% In this part you must determine the critical loading capacity of the
+% network. Choose a number P, and store P characters from your collection
+% in a Hopfield neural network. Distort these characters by inverting three
+% randomly chosen pixels and try to retrieve them. Do this by iterating the
+% network for a chosen number of iterations and clipping (rounding) the
+% pixels of the final state to +1 and -1. Calculate the error for several
+% values of P and plot this error as a function of P. The error is the total
+% number of wrong pixels over all the retrieved characters. Estimate the
+% critical loading capacity. Compare your estimated capacity to the
+% theoretical loading capacity of the Hopfield neural network that uses the
+% Hebb-rule for uncorrelated patterns. Discuss the existence of spurious patterns.
 
 lettera =  [1 1 1 1 0 ...
             0 0 0 0 1 ...
@@ -315,11 +315,115 @@ letterZ =  [1 1 1 1 1 ...
             1 0 0 0 0 ...
             1 1 1 1 1 ]';
 
-alphabet = [lettera, letterl, lettere, letterj, lettern, letterd, lettero, ...
+alphabet = [lettera, letterl, lettere, letterj, lettern, letterd, letterr, lettero, ...
             letteri, letterg, letteru, letterz, letterA,letterB,letterC,letterD,...
             letterE,letterF,letterG,letterH,...
             letterI,letterJ,letterK,letterL,letterM,letterN,letterO,letterP,...
             letterQ,letterR,letterS,letterT,letterU,letterV,letterW,letterX,...
             letterY,letterZ];
 
-targets = eye(26);
+alphabet(alphabet == 0) = -1;
+
+letters = 5:20;
+error = [];
+for num_letters = letters
+    index_dig = 1:num_letters;
+
+    T = [];
+    for i=1:num_letters
+        T = vertcat(T, alphabet(:, i)');
+    end
+    T = T';
+    %Create network
+    net = newhop(T);
+
+    %Check if digits are attractors
+    [Y,~,~] = sim(net,num_letters,[],T);
+    Y = Y';
+
+    figure;
+
+    subplot(num_letters,3,1);
+
+    for i = 1:num_letters
+        letter = Y(i,:);
+        letter = reshape(letter,5,7)'; 
+
+        subplot(num_letters,3,((i-1)*3)+1);
+        imshow(letter)
+        if i == 1
+            title('Attractors')
+        end
+        hold on
+    end
+
+    Xn = alphabet;
+    % change three random bits
+    for i = 1:num_letters
+        rands = randperm(35,3);
+        for j = 1:3
+            if Xn(rands(j),i) == 1
+                Xn(rands(j),i) = -1;
+            else
+                Xn(rands(j),i) = 1;
+            end
+        end
+    end
+
+    %Show noisy digits:
+    Tn = [];
+    for i=1:num_letters
+        Tn = vertcat(Tn, Xn(:, i)');
+    end
+
+    subplot(num_letters,3,2);
+
+    for i = 1:num_letters
+        letter = Tn(i,:);
+        letter = reshape(letter,5,7)';
+        subplot(num_letters,3,((i-1)*3)+2);
+        imshow(letter)
+        if i == 1
+            title('Noisy letters')
+        end
+        hold on
+    end
+
+
+    Tn = Tn';
+    step = 15;
+    T = T';
+
+        [Yn,~,~] = sim(net,{num_letters step},{},Tn);
+        Yn = Yn{1,step};
+        Yn = Yn';
+
+        subplot(num_letters,3,3);
+        for i = 1:num_letters
+            letter = Yn(i,:);
+            letter = reshape(letter,5,7)';
+            subplot(num_letters,3,((i-1)*3)+3);
+            imshow(letter)
+            if i == 1
+                title('Reconstructed noisy letters')
+            end
+            hold on
+        end
+
+        Yn(Yn < 0) = -1;
+        Yn(Yn >= 0) = 1;
+
+        diffs = sum(sum((T == Yn) == 0));
+        error = [error, diffs];
+end
+
+figure;
+plot(letters, error);
+title('Error reconstructing characters');
+xlabel('Characters');
+ylabel('Error (in pixels)');
+
+% What options would you have when you need to store 25 characters with the 
+% matlab routines in such a way that characters with three random inversions
+% can be retrieved perfectly? Demonstrate a method using the first 25
+% characters of your collection as a basis.

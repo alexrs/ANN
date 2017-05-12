@@ -1,3 +1,27 @@
+% Dear students,
+% 
+% Since we received similar questions about the first final project, here are some hints:
+% 
+% For plotting the data as a surface the following functions can be useful: 
+% 
+% linspace
+% meshgrid
+% mesh
+% TriScatteredInterp
+% In particular, in the help of the last function you can find a very clear example.
+% 
+% Also, to force your network to use specific training, validation and test set you can use the following approach: 
+% 
+% change net.divideFcn = 'divideind'
+% remember to update the corresponding attribute net.divideParam.
+% We suggest you check the corresponding help to understand how to proceed.
+% 
+% Best of lucks with your project.
+% 
+% Best regards.
+
+% 1. Define your datasets
+
 data = load('Data_Problem1_regression.mat');
 
 X1 = data.X1;
@@ -24,6 +48,7 @@ Ttrain = Tnew(indices_random(1:1000));
 Tval = Tnew(indices_random(1001:2000));
 Ttest = Tnew(indices_random(2001:3000));
 
+% Plot trainig set
 X1_random = X1(indices_random(1:1000));
 X2_random = X2(indices_random(1:1000));
 
@@ -35,3 +60,7 @@ F = scatteredInterpolant(X1_random, X2_random, Ttrain);
 V = F(Xgrid, Ygrid);
 
 surf(Xlin, Ylin, V);
+
+% 1.2. Build and train your feedforward Neural Network
+
+% 1.3. Performance Assessment

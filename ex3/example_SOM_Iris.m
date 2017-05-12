@@ -14,7 +14,9 @@ true_labels = iris(:,end);
 x_length = 3;
 y_length = 1;
 gridsize=[y_length x_length];
-net = newsom(X',gridsize,'gridtop','linkdist');
+net = newsom(X',gridsize,'hextop','linkdist');
+
+
 net.trainParam.epochs = 100;
 net = train(net,X');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

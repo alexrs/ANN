@@ -32,6 +32,8 @@ num_dig = 10;
 %--------------------------------------------------------------------------
 
 T = [zero;one;two;three;four;five;six;seven;eight;nine]';
+size(zero)
+size(T)
 
 %Create network
 net = newhop(T);
@@ -68,7 +70,7 @@ end
 noise = noiselevel*maxx; % sd for Gaussian noise
 
 Xn = X; 
-for i=1:N;
+for i=1:N
   Xn(i,:) = X(i,:) + noise*randn(1, dim);
 end
 

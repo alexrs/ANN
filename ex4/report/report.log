@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.18)  4 MAR 2017 16:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.18)  2 MAY 2017 19:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**../ex1/report/report.tex
-(../ex1/report/report.tex
+**report.tex
+(./report.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
@@ -863,8 +863,7 @@ Package: multicol 2016/04/07 v1.8p multicolumn formatting (FMi)
 \mult@nat@firstbox=\box63
 \colbreak@box=\box64
 \mc@col@check@num=\count131
-)
-No file report.aux.
+) (./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
@@ -881,7 +880,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 30.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 30.
@@ -939,6 +938,8 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 30.
 LaTeX Info: Redefining \pageref on input line 30.
 LaTeX Info: Redefining \nameref on input line 30.
+
+(./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
@@ -991,121 +992,80 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 33.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 43.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 42.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
+<img/cnn.jpeg, id=4, 571.13374pt x 202.7575pt>
+File: img/cnn.jpeg Graphic file (type jpg)
+ <use img/cnn.jpeg>
+Package pdftex.def Info: img/cnn.jpeg used on input line 70.
+(pdftex.def)             Requested size: 240.24199pt x 85.2875pt.
 
-! LaTeX Error: File `img/vsLMep' not found.
+<img/layerweights.png, id=5, 768.8725pt x 682.55pt>
+File: img/layerweights.png Graphic file (type png)
+ <use img/layerweights.png>
+Package pdftex.def Info: img/layerweights.png used on input line 95.
+(pdftex.def)             Requested size: 240.24199pt x 213.2651pt.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.53 ...egraphics[width=.65\linewidth]{img/vsLMep}
-                                                  
-? 
+[1
 
-! LaTeX Error: File `img/vsBFGnoisyEp' not found.
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./img/c
+nn.jpeg> <./img/layerweights.png (PNG copy)>]
+<img/maxpool.jpeg, id=21, 789.95125pt x 369.38pt>
+File: img/maxpool.jpeg Graphic file (type jpg)
+ <use img/maxpool.jpeg>
+Package pdftex.def Info: img/maxpool.jpeg used on input line 119.
+(pdftex.def)             Requested size: 240.24199pt x 112.33664pt.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.89 ...ics[width=.65\linewidth]{img/vsBFGnoisyEp}
-                                                  
-? 
-
-Underfull \hbox (badness 6032) in paragraph at lines 91--93
-[]\T1/cmr/m/n/10 The two plots show the per-for-mance us-ing
+Underfull \hbox (badness 10000) in paragraph at lines 125--132
+\T1/cmtt/m/n/10 cross-entropy with 'n01440764', 'n01443537',
  []
 
 
-! LaTeX Error: File `img/perfLM' not found.
+Underfull \hbox (badness 10000) in paragraph at lines 125--132
+\T1/cmtt/m/n/10 and 998 other classes \T1/cmr/m/n/10 and when ex-e-cut-ing
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.94 ...degraphics[width=.7\linewidth]{img/perfLM}
-                                                  
-? 
-
-! LaTeX Error: File `img/perfLMnoisy' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.96 ...phics[width=.7\linewidth]{img/perfLMnoisy}
-                                                  
-? 
-
-! LaTeX Error: File `img/vsBRnoisyEp' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.101 ...ics[width=.65\linewidth]{img/vsBRnoisyEp}
-                                                  
-? 
-
-! LaTeX Error: File `img/errBR' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.108 ...degraphics[width=.7\linewidth]{img/errBR}
-                                                  
-? 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 112.
-[1
-
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 112.
-
-(./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 112.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 112.
-
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 112.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.134 \end{document}
+                     [2 <./img/maxpool.jpeg>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
+ (./report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 134.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 134.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 134.
  ) 
 Here is how much of TeX's memory you used:
- 8712 strings out of 493014
- 119269 string characters out of 6133351
- 226769 words of memory out of 5000000
- 12085 multiletter control sequences out of 15000+600000
- 17320 words of font info for 56 fonts, out of 8000000 for 9000
+ 8711 strings out of 493014
+ 119422 string characters out of 6133351
+ 216844 words of memory out of 5000000
+ 12095 multiletter control sequences out of 15000+600000
+ 15858 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,6n,32p,341b,323s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<
+ 29i,6n,32p,240b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+}{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on report.pdf (1 page, 160920 bytes).
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on report.pdf (2 pages, 452595 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
- 50 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
+ 4 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -6,11 +6,13 @@ nnet.guis.closeAllViews();
 % Neural networks have weights randomly initialized before training.
 % Therefore the results from training are different each time. To avoid
 % this behavior, explicitly set the random number generator seed.
-rng('default')
+%rng('default')
 
 
 % Load the training data into memory
-[xTrainImages, tTrain] = digittrain_dataset;
+data = load ('digittrain_dataset.mat');
+xTrainImages = data.xTrainImages;
+tTrain = data.tTrain;
 
 % Layer 1
 hiddenSize1 = 100;
@@ -37,18 +39,32 @@ autoenc2 = trainAutoencoder(feat1,hiddenSize2, ...
 feat2 = encode(autoenc2,feat1);
 
 % Layer 3
-softnet = trainSoftmaxLayer(feat2,tTrain,'MaxEpochs',400);
+hiddenSize3 = 20;
+autoenc3 = trainAutoencoder(feat2,hiddenSize3, ...
+    'MaxEpochs',100, ...
+    'L2WeightRegularization',0.001, ...
+    'SparsityRegularization',4, ...
+    'SparsityProportion',0.1, ...
+    'ScaleData', false);
+
+feat3 = encode(autoenc3,feat2);
+
+% Layer 3
+softnet = trainSoftmaxLayer(feat3,tTrain,'MaxEpochs',400);
 
 
 % Deep Net
-deepnet = stack(autoenc1,autoenc2,softnet);
+deepnet = stack(autoenc1,autoenc2, autoenc3,softnet);
 
 
 % Test deep net
 imageWidth = 28;
 imageHeight = 28;
 inputSize = imageWidth*imageHeight;
-[xTestImages, tTest] = digittest_dataset;
+% Load the test images
+testdata = load('digittest_dataset.mat');
+xTestImages = testdata.xTestImages;
+tTest = testdata.tTest;
 xTest = zeros(inputSize,numel(xTestImages));
 for i = 1:numel(xTestImages)
     xTest(:,i) = xTestImages{i}(:);
