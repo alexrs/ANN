@@ -1,0 +1,70 @@
+% What options would you have when you need to store 25 characters with the 
+% matlab routines in such a way that characters with three random inversions
+% can be retrieved perfectly? Demonstrate a method using the first 25
+% characters of your collection as a basis.
+
+
+% [w, pc, ev] = pca(alphabet);
+% mu = mean(alphabet);
+% xhat = alphabet - mu; % subtract the mean
+% norm(pc * w' - xhat)
+% plot(mu)
+% title('mean')
+
+num_letters = 5;
+error = [];
+
+[alphabet, target] = get_alphabet();
+T = eye(num_letters); % identity matrix
+P = [];
+for i=1:num_letters
+    P = vertcat(P, alphabet(:, i)');
+end
+%Create network
+numN = 15;
+trainAlg = 'traingd';
+net = feedforwardnet(numN, trainAlg);
+net.layers{2}.transferFcn = 'tansig';
+net.trainParam.epochs = 400;
+net.trainParam.goal = 0; 
+
+net = train(net, P', T');
+
+Pn = gen_noisy_chars(P');
+
+Y = sim(net, Pn);
+Y = full(compet(Y));
+
+output = alphabet;
+for i = 1:size(Y,2)
+     index = find(Y(:,i));
+     output(:,i) = alphabet(:,index); 
+end
+
+subplot(num_letters,3,2);
+
+Pn = Pn';
+show_chars(num_letters, Yn, 'Reconstructed noisy letters', 2);
+for i = 1:num_letters
+    letter = Pn(i,:);
+    letter = reshape(letter,5,7)';
+    subplot(num_letters,3,((i-1)*3)+2);
+    imshow(letter)
+    if i == 1
+        title('Noisy letters')
+    end
+    hold on
+end
+
+subplot(num_letters,3,3);
+output = output';
+for i = 1:num_letters
+    letter = output(i,:);
+    letter = reshape(letter,5,7)';
+    subplot(num_letters,3,((i-1)*3)+3);
+    imshow(letter)
+    if i == 1
+        title('Reconstructed noisy letters')
+    end
+    hold on
+end

@@ -47,7 +47,7 @@ xlabel('Column'); ylabel('%'); grid on;
 
 [v, d] = eig(cov(X));
 figure
-plot(diag(D));
+plot(diag(d));
 title('Eigenvalues')
 
 error = [];

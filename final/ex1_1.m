@@ -41,7 +41,7 @@ d5 = 1;
 
 Tnew = (d1*T1 + d2*T2 + d3*T3 + d4*T4 + d5*T5) / (d1 + d2 + d3 + d4 + d5);
 
-indices = 1:13600;
+indices = 1:13600; % 13600 is length of the dataset
 indices_random = randperm(length(indices));
 
 Ttrain = Tnew(indices_random(1:1000));
@@ -52,15 +52,36 @@ Ttest = Tnew(indices_random(2001:3000));
 X1_random = X1(indices_random(1:1000));
 X2_random = X2(indices_random(1:1000));
 
-Xlin = linspace(min(X1_random), max(X1_random));
-Ylin = linspace(min(X2_random), max(X2_random));
+Xlin = linspace(min(X1_random), max(X1_random), length(X1_random));
+Ylin = linspace(min(X2_random), max(X2_random), length(X2_random));
 [Xgrid, Ygrid] = meshgrid(Xlin, Ylin);
 
 F = scatteredInterpolant(X1_random, X2_random, Ttrain);
 V = F(Xgrid, Ygrid);
 
-surf(Xlin, Ylin, V);
+surf(Xlin, Ylin, V, 'EdgeColor','none');
 
 % 1.2. Build and train your feedforward Neural Network
+
+hiddenSizes = 5;
+trainFnc = 'trainlm';
+net = feedforwardnet();
+net.numInputs = 2;
+
+X1_seq = con2seq(X1_random);
+X2_seq = con2seq(X2_random);
+Ttrain_seq = con2seq(Ttrain);
+
+p = [X1_seq; X2_seq];
+t = Ttrain_seq;
+
+net = train(net, p, t);
+view(net)
+
+a = sim(net, p);
+
+
+
+
 
 % 1.3. Performance Assessment

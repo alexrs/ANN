@@ -46,8 +46,8 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
   The first 5 characters of the alphabet are \texttt{a, l, e, j}
   and \texttt{n}, this is, the first five characters that appear in
   my first name and last name. After loading this characters, the
-  pixels whose value is 0 must be changed by -1. This has to be done
-  because Hopfield nets normally have units that take on values of
+  pixels whose value is 0 must be changed to -1. This has to be done
+  because Hopfield networks normally have units that take on values of
   1 or -1 as convention.
 
   % Image of the characters
@@ -57,9 +57,13 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
   With this five characters as attractor states, a Hopfield neural
   network is created. Then, three random pixels of each character
-  are inverted (from 1 to -1 and viceversa). The objective of this
+  are inverted (from 1 to -1 and vice versa). The objective of this
   inversion is to check if the network is able to reconstruct the
   distorsioned characters.
+
+  \begin{center}
+    \includegraphics[width=0.7\linewidth]{img/net}
+  \end{center}
 
   Executing the neural network with the noisy characters as input
   shows the following results:
@@ -80,20 +84,39 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
     \end{center}
   \end{itemize}
 
-  Sporious patters are local energy minima that are created during
+  Sporious patterns are local energy minima that are created during
   training, in addition to the intended target patterns. They are
   activity patterns that have not been explicitly embedded in the
   synaptic matrix, but are nonetheless stable. They are in other
   words "unwanted" attractor states that, by virtue of a finite
   overlap with the "wanted" attractor states, come about as a
-  local minimum in the energy function. In this case, the existence
-  of sporious patters is not noticeable.
+  local minimum in the energy function. They can be composed of
+  various combinations of the original patterns or simply the
+  negation of any pattern in the original pattern set.
+
+  There are three different types of spurious states:
+
+  \begin{enumerate}
+  \item For each stored pattern, its negation is also an attractor
+  \item Any linear combination of an odd number of stored patterns.
+    give rise to the so-called mixture states. Note that Spurious
+    patterns that have an even number of states cannot exist, since they might sum up to zero.
+  \item for large $p$, we get local minima that are not correlated to
+    any linear combination of stored patterns.
+  \end{enumerate}
+
+  In this case, the existence of spurious patters is not noticeable.
+  According to Hebb rule, a Hopfield network can store up to $0.138N$
+  uncorrelated patterns, being $N$ the number of neurons. Replacing
+  $N$ by its value in this problem, 35, gives that the uncorrelated
+  patterns that can be stored is almost 5, which is the number of
+  charaters used in this exercise.
 
   \section*{Task 2: Critical loading capacity}
   A Hopfield neural network exceed the loading capacity when the number of
-  learned patterns over number of units $p/N$ is lower than the critical
+  learned patterns over the number of units $p/N$ is greater than the critical
   capacity $\alpha \approx 0.138$.
-  First, a number $P = 20$ characters is selected, and the error in the
+  First, a number $p = 20$ characters is selected, and the error in the
   reconstruction is calculated as a function of the number of steps used
   to reconstruct the character.
 
@@ -116,16 +139,35 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
   in each image. The dimension of each image is $7 \times 5$, which means that
   the number of neurons of the network is 35.
 
-  Now, the critical capacity can be expressed as $p/35$. 
-  
+  Now, the critical capacity can be expressed as $p/35$.
+
+  It can be seen in the previous plot that when the number of patterns
+  $p$ has values below 15, there is no error in the reconstruction,
+  but when it is increased, an error in the reconstruction appears.
+
+  The loading capacity can be expressed then as $15/35 = 0.428$, which is
+  much higher than the one obtained using Hebb-rule.
+
+  This is an interesting phenomena. Nevertheless, it has an explanation. It
+  could happen that the spurious states and the real attractors overlap, which
+  means that the reconstruction of the character will be correct even if the
+  pixel is reconstructed by an spurious state. Hebb rule states that it can be
+  stored $0.138N$ uncorrelated patterns, which in this case would be
+  $0.138 \times 35 \approx 5$ patterns, as aforementioned. It can be then concluded that
+  the charaters are not uncorrelated patterns.    
   
   \section*{Task 3: Retrieve 25 characters}
+  % PCA?
+  % 
   
   %https://en.wikipedia.org/wiki/Hopfield_network
   %https://cogsci.stackexchange.com/questions/903/spurious-attractors-in-hopfield-networks
   %https://www.quora.com/What-are-spurious-states-in-Hopfield-networks
+  % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4546407/
+  % http://www.doc.ic.ac.uk/~ae/papers/Hopfield-networks-15.pdf
 
 \end{multicols}
+\newpage
 
   \section*{Appendix}
 
