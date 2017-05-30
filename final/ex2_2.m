@@ -10,7 +10,7 @@
 % theoretical loading capacity of the Hopfield neural network that uses the
 % Hebb-rule for uncorrelated patterns. Discuss the existence of spurious patterns.
 
-[alphabet, ~] = get_alphabet(1);
+[alphabet, ~] = get_alphabet();
 
 letters = 5:20;
 error = [];

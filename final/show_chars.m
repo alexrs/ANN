@@ -10,12 +10,10 @@ subplot(num_letters, 3, ind);
         letter = chars(i,:);
         letter = reshape(letter,5,7)'; 
 
-        subplot(num_letters,3,((i-1)*3)+ind);
-        imshow(letter)
-        if i == 1
-            title(desc)
-        end
+        subplot(5,5,(i));
+        colormap('winter')
+        imagesc(letter)
         hold on
+        axis off
     end
-
 end

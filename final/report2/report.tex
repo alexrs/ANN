@@ -14,6 +14,7 @@
 \usepackage{marvosym}
 \usepackage{wasysym}
 \usepackage{amssymb}
+\usepackage{listings}
 \tolerance=1000
 \usepackage{natbib}
 \usepackage[linktocpage,pdfstartview=FitH,colorlinks,
@@ -62,7 +63,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
   distorsioned characters.
 
   \begin{center}
-    \includegraphics[width=0.7\linewidth]{img/net}
+    \includegraphics[width=\linewidth]{img/net}
   \end{center}
 
   Executing the neural network with the noisy characters as input
@@ -121,7 +122,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
   to reconstruct the character.
 
   \begin{center}
-    \includegraphics[height=0.8\linewidth]{img/plot_error1}
+    \includegraphics[width=\linewidth]{img/plot_error1}
   \end{center}
 
   The purpose of this plot is to see how the approximation becomes more
@@ -130,7 +131,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
   of steps fixed at 15.
 
   \begin{center}
-    \includegraphics[height=0.8\linewidth]{img/plot_error2}
+    \includegraphics[width=\linewidth]{img/plot_error2}
   \end{center}
 
   The critical capacity of a Hopfield network, as stated before, is $p/N$,
@@ -157,8 +158,86 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
   the charaters are not uncorrelated patterns.    
   
   \section*{Task 3: Retrieve 25 characters}
-  % PCA?
-  % 
+  As it can be seen previously, Hopfield networks works well when the number
+  of stored patterns is small, but when it increases, spurious states appears
+  and the images cannot be reconstructed. For this reason, a different approach
+  should be used.
+
+  As we already know from previous assignments, a feedforward
+  network with one hidden layer and enough neurons in the hidden layers,
+  can fit any finite input-output mapping problem. But some changes
+  should be done to use the data with a feedforward network.
+
+  When using a feedforward network, a set of targets and data is needed.
+  The data corresponds to the digits previously used, but it is neccessary to
+  assign a class to each of the digits. It can be done creating an indentity matrix
+  whose dimensions are the number of digits, 25 in this case.
+
+  Different architectures and parameters where used, but in some cases the network where not
+  able to identify correctly the characters. There are different techniques to improve
+  the performance and accuracy of a neural network, but the simplest and most effective
+  one is to generate more training data. As we are trying to idenfify noisy characters,
+  is it possible to generate a set of noisy characters and append them to the original ones.
+  Now, our network not only learns with the original characters, but also with noisy characters
+  similar to the ones it will have to clasify later.
+
+  As expected, the network learnt to clasify better the digits, but the results showed where
+  not perfect. It happened that depending on which pixels were inverted, two different
+  characters can become almost equal, as happens with G and C.
+
+  At this point, the obvious idea is to generate more noisy characters and add them to our
+  trainig data set. It could be an option, but we take the risk that our network does not
+  learn to generalize.
+
+  Can we do anything else to improve the accuracy of a neural network? Fortunately, yes, we can.
+  Two common techniques to improve generalization and avoid overfitting are
+  \textbf{retraining the neural network} and \textbf{using multiple neural networks}.
+
+  The approach used consists of use multiple neural networks and average their outputs.
+  This technique is really useful when the error in the classification is caused by noisy
+  data or a small dataset, which is exactly this case.
+
+  To solve this problem, ten feedfordward neural networks have been used, with
+  50 neurons in the hidden layer, \texttt{tansig} transfer function for the output
+  layer, and bayesian regularization backpropagation for training.
+
+  \begin{center}
+    \includegraphics[width=\linewidth]{img/net2}
+  \end{center}
+  
+  The distorsioned data set of the first 25 characters can be seen in the following image:
+  \begin{center}
+    \includegraphics[width=\linewidth]{img/noisy25}
+  \end{center}
+
+  And finally, it is perfectly reconstructed:
+  \begin{center}
+    \includegraphics[width=\linewidth]{img/reconstructed25}
+  \end{center}
+
+  \section*{Conclusion}
+  After solving the reconstruction of noisy digits problem using two different approaches,
+  it's time to discuss the advantages and drawbacks of each one.
+
+  Using Hopfield networks to reconstruct noisy characters is a good idea when the number
+  of patters to store in the network, this is, the number of characters is small. Once
+  the number of stored patterns grows, spurious states appers, and the accuracy of the
+  network decreases. In fact, as it have been seen before, the maximum theoretical number
+  of patters the network can store is $N \frac 2\times ln N $, being $N$ the number of neurons.
+  However, Hopfield networks are fast when training, so if training speed is a bottleneck in
+  our problem, using this type of network can be the solution.
+
+  The second approach, feedfordward networks, is different from the first one in the sense that
+  this network does not reconstruct the character, but identifies which one has been received as
+  input. We have seen that this networks can fit any finite input-output mapping problem, which
+  means that if the trainig data set is good enough and the number of neurons in the hidden layer
+  is high, we can \textit{reconstruct} any set of characters, independently of its size, and if
+  the training data set is small, other techniques can be used, as previously seen in this assignment.
+  The main problem with this type of network is that it needs a lot of time for training, unlike
+  Hopfield networks.
+
+  It can be concluded that feedforward netwoks are more suitable for pattern recognition than
+  Hopfield networks if the main concern is accuracy in the classification.
   
   %https://en.wikipedia.org/wiki/Hopfield_network
   %https://cogsci.stackexchange.com/questions/903/spurious-attractors-in-hopfield-networks
@@ -169,6 +248,32 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 \end{multicols}
 \newpage
 
-  \section*{Appendix}
+\section*{Appendix}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+
+\lstset{language=Matlab,
+    breaklines=true,
+    commentstyle=\color{mygreen},
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},
+    tabsize=2, 
+  }          % Set your language (you can change the language for each code-block optionally)
+  
+  \subsection*{gen\_noisy\_chars.m}
+  \lstinputlisting[frame=single]{../gen_noisy_chars.m}
+  \subsection*{get\_alphabet.m}
+  \lstinputlisting[frame=single]{../get_alphabet.m}
+  \subsection*{show\_chars.m}
+  \lstinputlisting[frame=single]{../show_chars.m}  
+  \subsection*{ex2\_1.m}
+  \lstinputlisting[frame=single]{../ex2_1.m}
+  \subsection*{ex2\_2.m}
+  \lstinputlisting[frame=single]{../ex2_2.m}
+  \subsection*{ex2\_3.m}
+  \lstinputlisting[frame=single]{../ex2_3.m}
 
 \end{document}

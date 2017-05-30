@@ -2,7 +2,7 @@
 % of these characters. Distort each character by inverting three randomly 
 % chosen pixels (so you change 1 to -1 and viceversa) and check if the network
 % is able to recall these distorted patterns. Discuss the existence of spurious patterns.
-[alphabet, ~] = get_alphabet(1);
+[alphabet, ~] = get_alphabet();
 
 a = alphabet(:, 1)';
 l = alphabet(:, 2)';

@@ -1,4 +1,4 @@
-function [alphabet, target] = get_alphabet(hopfield)
+function [alphabet, target] = get_alphabet()
 
 lettera =  [1 1 1 1 0 ...
             0 0 0 0 1 ...
@@ -312,9 +312,8 @@ alphabet = [lettera, letterl, lettere, letterj, lettern, letterd, letterr, lette
             letterQ,letterR,letterS,letterT,letterU,letterV,letterW,letterX,...
             letterY,letterZ];
 
-if hopfield
-    alphabet(alphabet == 0) = -1;
-end
+
+alphabet(alphabet == 0) = -1;
 
 target = eye(length(alphabet)); 
 
